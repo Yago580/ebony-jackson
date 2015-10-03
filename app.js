@@ -1,3 +1,25 @@
+Array.prototype.rotate = (function() {
+    // save references to array functions to make lookup faster
+    var push = Array.prototype.push,
+        splice = Array.prototype.splice;
+
+    return function(count) {
+        var len = this.length >>> 0, // convert to uint
+            count = count >> 0; // convert to int
+
+        // convert count to value in range [0, len)
+        count = ((count % len) + len) % len;
+
+        // use splice.call() instead of this.splice() to make function generic
+        push.apply(this, splice.call(this, 0, count));
+        return this;
+    };
+})();
+
+
+
+
+
 /**
  * GAME FLOW
  * 1. Prompt user for bet
@@ -36,36 +58,6 @@
  * - has a name
  **/
 
-
-
-function Game(player) {
-  this.deck = new Deck();
-  this.currentPlayer = player;
-}
-Game.prototype.newGame = function(player) {
-  this.deck           = new Deck();
-  this.currentPlayer  = player;
-}
-Game.prototype.nextTurn = function(player) {
-  if (!player)
-    this.currentPlayer = false;
-  else
-    this.currentPlayer = player;
-
-  this.promptPlayer();
-}
-
-
-function Player(name) {
-  this.name = name
-}
-Player.prototype.hit = function() {
-  return {action: 'hit'};
-}
-
-
-
-var game = new Game(new Player('Bitch'));
 
 
 
@@ -122,3 +114,43 @@ Deck.prototype.getCard = function() {
 }
 
 
+
+
+
+
+function Game(players) {
+  this.deck        = new Deck();
+  this.dealer      = new Dealer();
+  this.players     = players;
+}
+
+Game.prototype.currentPlayer = function() {
+  return this.players[0];
+}
+Game.prototype.hit = function() {
+  this.players[0].hit(this.deck.getCard());
+}
+Game.prototype.nextTurn = function() {
+  this.players.rotate();
+}
+
+
+function Player(name) {
+  this.name = name
+  this.hand = [];
+}
+Player.prototype.hit = function(card) {
+  this.hand.push(card);
+}
+
+function Dealer() {
+  this.hand = [];
+}
+
+
+var game = new Game([new Player('bitch'), new Player('hook')]);
+console.log(game.dealer);
+console.log(game.players);
+console.log(game.currentPlayer());
+console.log(game.players['chris']);
+// game.hit();
