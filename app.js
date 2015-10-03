@@ -38,6 +38,36 @@
 
 
 
+function Game(player) {
+  this.deck = new Deck();
+  this.currentPlayer = player;
+}
+Game.prototype.newGame = function(player) {
+  this.deck           = new Deck();
+  this.currentPlayer  = player;
+}
+Game.prototype.nextTurn = function(player) {
+  if (!player)
+    this.currentPlayer = false;
+  else
+    this.currentPlayer = player;
+
+  this.promptPlayer();
+}
+
+
+function Player(name) {
+  this.name = name
+}
+Player.prototype.hit = function() {
+  return {action: 'hit'};
+}
+
+
+
+var game = new Game(new Player('Bitch'));
+
+
 
 function Card(name, suit) {
   this.name  = name;
@@ -52,7 +82,7 @@ function Card(name, suit) {
   }
 
   function imageUrl() {
-    return "/images/cards/card_"+name+suit+".png"
+    return '/images/cards/card_'+name+suit+'.png'
   }
 }
 
@@ -87,14 +117,8 @@ function Deck() {
     return array;
   }
 }
-Deck.prototype.drawCard = function() {
+Deck.prototype.getCard = function() {
   return this._cards.pop();
 }
 
 
-
-
-
-function Player() {
-
-}
