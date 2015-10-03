@@ -42,27 +42,27 @@
 function Card(name, suit) {
   this.name  = name;
   this.suit  = suit;
-  this.value = getValue(name);
-  this.image = imageUrl(name);
+  this.value = getValue();
+  this.image = imageUrl();
 
-  function getValue(name) {
+  function getValue() {
     var faceCards = {'Ace':1, 'Jack':10, 'Queen':10, 'King':10}
     if (parseInt(name)) return parseInt(name);
     return faceCards[name];
   }
 
-  function imageUrl(name) {
-
+  function imageUrl() {
+    return "/images/cards/card_"+name+suit+".png"
   }
 }
 
 
 
 
+
 function Deck() {
-  var suits  = ['Diamonds','Clubs','Hearts','Spades'];
-  var faces  = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King']
-  
+  var suits  = ['diamonds','clubs','hearts','spades'];
+  var faces  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
   this._cards = shuffle(buildDeck());
 
   function buildDeck() {
@@ -92,5 +92,9 @@ Deck.prototype.drawCard = function() {
 }
 
 
-var deck = new Deck();
-console.log(deck.drawCard());
+
+
+
+function Player() {
+
+}
