@@ -21,9 +21,9 @@
         </div>
 
         <div class="controls">
-            <button id="beginGame">Begin Game</button>
+            <button id="beginGame" onclick="newGame()">Begin Game</button>
 
-            <form action="" id="betControls" hidden>
+            <form action="" id="betControls" onsubmit="postBet()" hidden>
                 <input type="radio" name="amount" value="5">$5
                 <input type="radio" name="amount" value="10">$10
                 <input type="radio" name="amount" value="15">$15
@@ -40,6 +40,6 @@
 
         <script src="jquery.min.js" type="text/javascript"></script>
         <script src="app.js" type="text/javascript"></script>
-        <script src="listeners.js" type="text/javascript"></script>
+        <script src="game.js" type="text/javascript"></script>
     </body>
 </html>

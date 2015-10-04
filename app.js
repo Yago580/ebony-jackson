@@ -141,13 +141,15 @@ Game.prototype.dealCards = function(player) {
 
 
 function Player(name) {
-  this.name    = name
-  this.hand    = [];
-  this.balance = 2000;
+  this.name     = name
+  this.hand     = [];
+  this.balance  = 2000;
   this.domClass = 'player';
+  this.bet      = 0;
 }
 Player.prototype.postBet = function(amount) {
   this.balance -= amount;
+  this.bet = amount;
 }
 Player.prototype.hit = function(card) {
   this.hand.push(card);
