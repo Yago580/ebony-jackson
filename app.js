@@ -64,12 +64,12 @@ Array.prototype.rotate = (function() {
 function Card(name, suit) {
   this.name  = name;
   this.suit  = suit;
-  this.value = getValue();
+  this.amount = getValue();
   this.image = imageUrl();
   this.dealt = false;
 
   function getValue() {
-    var faceCards = {'Ace':1, 'Jack':10, 'Queen':10, 'King':10}
+    var faceCards = {'A':1, 'J':10, 'Q':10, 'K':10}
     if (parseInt(name)) return parseInt(name);
     return faceCards[name];
   }
@@ -78,7 +78,6 @@ function Card(name, suit) {
     return '/images/cards/card_'+name+suit+'.png'
   }
 }
-
 
 
 
@@ -153,8 +152,6 @@ function Player(name) {
 Player.prototype.postBet = function(amount) {
   this.balance -= amount;
 }
-
-
 Player.prototype.hit = function(card) {
   this.hand.push(card);
 }
@@ -162,6 +159,21 @@ Player.prototype.unDealtCards = function() {
   return this.hand.filter(function (card) {
     return !card.dealt;
   })
+}
+Player.prototype.handTotal = function() {
+  if (this.hand.length === 1)
+    return this.hand[0].amount;
+
+  var handValues = this.hand.map(function (card) {
+    return card.amount;
+  });
+
+  return handValues.reduce(function (a, b) {
+    return a + b;
+  })
+}
+Player.prototype.winBet = function(amount) {
+  this.balance += amount * 2;
 }
 
 

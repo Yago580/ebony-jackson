@@ -23,12 +23,22 @@ $('#betControls').on('submit', function (event) {
   toggleButtons($(this), $('#deal'));
 });
 
-$('#deal').on('click', function (event) {
+
+function dealCards() {
   game.hitPlayer(player);
-  dealCards();
-})
+  appendCards();
 
+  if (player.handTotal() < 21)
+    promptNextMove();
+  else if (player.handTotal() === 21)
+    playerWins(player);
+  else
+    playerBusts(player);
+}
 
+function dealerTurn() {
+  debugger
+}
 
 
 function updateBalance() {
@@ -36,7 +46,7 @@ function updateBalance() {
   $('#currentBet').text(game.currentBet);
 }
 
-function dealCards(card) {
+function appendCards(card) {
   var $freeSlots = $('.card-slot.free');
   player.unDealtCards().forEach(function (card, index) {
     var $slot = $($freeSlots[index]);
@@ -52,4 +62,18 @@ function toggleButtons(hide, show) {
 
 function imageFrom(card) {
   return $('<img>').attr('class', 'card').attr('src', card.image);
+}
+
+function promptNextMove() {
+  toggleButtons($('#deal'), $('.hitStay'));
+}
+
+function playerWins(player) {
+  player.winBet(game.currentBet);
+  updateBalance();
+  console.log('You win!');
+}
+
+function playerBusts() {
+  console.log('you bust!');
 }

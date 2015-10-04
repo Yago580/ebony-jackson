@@ -15,7 +15,6 @@
             <div class="card-slot free" id="player-slot-4"></div>
         </div>
 
-
         <div class="controls">
             <button id="beginGame">Begin Game</button>
 
@@ -27,7 +26,11 @@
                 <button type="submit">Place Bet</button>
             </form>
 
-            <button id="deal" hidden>Deal</button>
+            <button id="deal" onclick="dealCards()" hidden>Deal</button>
+            <div class="hitStay" hidden>
+                <button id="hit" onclick="dealCards()">Hit</button>
+                <button id="stay" onclick="dealerTurn()">Stay</button>
+            </div>
         </div>
 
         <script src="jquery.min.js" type="text/javascript"></script>
