@@ -1,0 +1,39 @@
+/** {
+  border: 1px solid red;
+}*/
+
+img.table{
+  position:absolute;
+  z-index:-1;
+}
+
+div.card-slot{
+  width:120px;
+  height:170px;
+  position:fixed;
+}
+
+div#player-slot-1{
+  left:325px;
+  top:415px;
+}
+
+div#player-slot-2{
+  left:375px;
+  top:415px;
+}
+
+div#player-slot-3{
+  left:425px;
+  top:415px;
+}
+
+div#player-slot-4{
+  left:475px;
+  top:415px;
+}
+
+img.card{
+  width:120px;
+  height:170px;
+}
