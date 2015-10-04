@@ -66,6 +66,7 @@ function Card(name, suit) {
   this.suit  = suit;
   this.value = getValue();
   this.image = imageUrl();
+  this.dealt = false;
 
   function getValue() {
     var faceCards = {'Ace':1, 'Jack':10, 'Queen':10, 'King':10}
@@ -118,39 +119,63 @@ Deck.prototype.getCard = function() {
 
 
 
-function Game(players) {
+function Game() {
   this.deck        = new Deck();
   this.dealer      = new Dealer();
-  this.players     = players;
+  this.currentBet;
+}
+Game.prototype.takeBet = function(player, amount) {
+  player.postBet(amount);
+  this.currentBet = amount;
+}
+Game.prototype.hitPlayer = function(player) {
+  player.hit(this.deck.getCard());
 }
 
-Game.prototype.currentPlayer = function() {
-  return this.players[0];
-}
-Game.prototype.hit = function() {
-  this.players[0].hit(this.deck.getCard());
-}
-Game.prototype.nextTurn = function() {
-  this.players.rotate();
-}
+
+
+// Game.prototype.currentPlayer = function() {
+//   return this.players[0];
+// }
+// Game.prototype.hit = function() {
+//   this.players[0].hit(this.deck.getCard());
+// }
+// Game.prototype.nextTurn = function() {
+//   this.players.rotate();
+// }
 
 
 function Player(name) {
-  this.name = name
-  this.hand = [];
+  this.name    = name
+  this.hand    = [];
+  this.balance = 2000;
 }
+Player.prototype.postBet = function(amount) {
+  this.balance -= amount;
+}
+
+
 Player.prototype.hit = function(card) {
   this.hand.push(card);
 }
+Player.prototype.unDealtCards = function() {
+  return this.hand.filter(function (card) {
+    return !card.dealt;
+  })
+}
+
+
+
+
 
 function Dealer() {
   this.hand = [];
 }
 
 
-var game = new Game([new Player('bitch'), new Player('hook')]);
-console.log(game.dealer);
-console.log(game.players);
-console.log(game.currentPlayer());
-console.log(game.players['chris']);
+// var game = new Game([new Player('bitch'), new Player('hook')]);
+// console.log(game.dealer);
+// console.log(game.players);
+// console.log(game.currentPlayer());
+// console.log(game.players['chris']);
 // game.hit();

@@ -1,8 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="./app.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="app.css">
     </head>
     <body>
+        <header>
+            Balance: <span id="balance"></span> | Current Bet: <span id="currentBet"></span>
+        </header>
+        <div class="tableContainer">
+            <img src="images/table.png" alt="table">
+            <div class="card-slot free" id="player-slot-1"></div>
+            <div class="card-slot free" id="player-slot-2"></div>
+            <div class="card-slot free" id="player-slot-3"></div>
+            <div class="card-slot free" id="player-slot-4"></div>
+        </div>
+
+
+        <div class="controls">
+            <button id="beginGame">Begin Game</button>
+
+            <form action="" id="betControls" hidden>
+                <input type="radio" name="amount" value="5">$5
+                <input type="radio" name="amount" value="10">$10
+                <input type="radio" name="amount" value="15">$15
+                <input type="radio" name="amount" value="20">$20
+                <button type="submit">Place Bet</button>
+            </form>
+
+            <button id="deal" hidden>Deal</button>
+        </div>
+
+        <script src="jquery.min.js" type="text/javascript"></script>
+        <script src="app.js" type="text/javascript"></script>
+        <script src="listeners.js" type="text/javascript"></script>
     </body>
 </html>
