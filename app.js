@@ -127,27 +127,24 @@ Game.prototype.takeBet = function(player, amount) {
   player.postBet(amount);
   this.currentBet = amount;
 }
-Game.prototype.hitPlayer = function(player) {
+Game.prototype.dealCard = function(player) {
   player.hit(this.deck.getCard());
+}
+Game.prototype.dealCards = function(player) {
+  this.dealCard(player);
+  this.dealCard(player);
 }
 
 
 
-// Game.prototype.currentPlayer = function() {
-//   return this.players[0];
-// }
-// Game.prototype.hit = function() {
-//   this.players[0].hit(this.deck.getCard());
-// }
-// Game.prototype.nextTurn = function() {
-//   this.players.rotate();
-// }
+
 
 
 function Player(name) {
   this.name    = name
   this.hand    = [];
   this.balance = 2000;
+  this.domClass = 'player';
 }
 Player.prototype.postBet = function(amount) {
   this.balance -= amount;
@@ -161,6 +158,7 @@ Player.prototype.unDealtCards = function() {
   })
 }
 Player.prototype.handTotal = function() {
+  if (this.hand.length === 0) return 0;
   if (this.hand.length === 1)
     return this.hand[0].amount;
 
@@ -175,6 +173,9 @@ Player.prototype.handTotal = function() {
 Player.prototype.winBet = function(amount) {
   this.balance += amount * 2;
 }
+Player.prototype.discardHand = function() {
+  this.hand = [];
+}
 
 
 
@@ -182,12 +183,29 @@ Player.prototype.winBet = function(amount) {
 
 function Dealer() {
   this.hand = [];
+  this.domClass = 'dealer';
 }
+Dealer.prototype.hit = function(card) {
+  this.hand.push(card);
+}
+Dealer.prototype.unDealtCards = function() {
+  return this.hand.filter(function (card) {
+    return !card.dealt;
+  })
+}
+Dealer.prototype.handTotal = function() {
+  if (this.hand.length === 0) return 0;
+  if (this.hand.length === 1)
+    return this.hand[0].amount;
 
+  var handValues = this.hand.map(function (card) {
+    return card.amount;
+  });
 
-// var game = new Game([new Player('bitch'), new Player('hook')]);
-// console.log(game.dealer);
-// console.log(game.players);
-// console.log(game.currentPlayer());
-// console.log(game.players['chris']);
-// game.hit();
+  return handValues.reduce(function (a, b) {
+    return a + b;
+  })
+}
+Dealer.prototype.discardHand = function() {
+  this.hand = [];
+}

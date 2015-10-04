@@ -7,7 +7,13 @@ img.table{
   z-index:-1;
 }
 
-div.card-slot{
+div.player-card-slot{
+  width:120px;
+  height:170px;
+  position:fixed;
+}
+
+div.dealer-card-slot{
   width:120px;
   height:170px;
   position:fixed;
@@ -31,6 +37,26 @@ div#player-slot-3{
 div#player-slot-4{
   left:475px;
   top:415px;
+}
+
+div#dealer-slot-1{
+  left:325px;
+  top:75px;
+}
+
+div#dealer-slot-2{
+  left:375px;
+  top:75px;
+}
+
+div#dealer-slot-3{
+  left:425px;
+  top:75px;
+}
+
+div#dealer-slot-4{
+  left:475px;
+  top:75px;
 }
 
 img.card{
