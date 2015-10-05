@@ -159,19 +159,6 @@ Player.prototype.unDealtCards = function() {
     return !card.dealt;
   })
 }
-Player.prototype.handTotal = function() {
-  if (this.hand.length === 0) return 0;
-  if (this.hand.length === 1)
-    return this.hand[0].amount;
-
-  var handValues = this.hand.map(function (card) {
-    return card.amount;
-  });
-
-  return handValues.reduce(function (a, b) {
-    return a + b;
-  })
-}
 Player.prototype.winBet = function(amount) {
   this.balance += amount * 2;
 }
@@ -183,6 +170,42 @@ Player.prototype.bust = function() {
 }
 Player.prototype.twentyOne = function() {
   return this.handTotal() === 21;
+}
+Player.prototype.handTotal = function() {
+  if (this.hand.length === 1)
+    return this.hand[0].amount;
+
+  var aces = getAces(this.hand);
+  var regValues = getValues(getRegs(this.hand));
+  var handTotal = regValues.reduce(function (a, b) {
+    return a + b;
+  });
+
+  aces.forEach(function (value) {
+    handTotal += (handTotal < 11) ? 11 : 1;
+  });
+
+  return handTotal;
+
+
+  function getAces(hand) {
+    return hand.filter(function (card) {
+      return card.amount === 1;
+    })
+  }
+
+  function getRegs(hand) {
+    return hand.filter(function (card) {
+      return card.amount !== 1;
+    })
+  }
+
+  function getValues(hand) {
+    return hand.map(function (card) {
+      return card.amount;
+    });
+  }
+
 }
 
 
@@ -196,25 +219,13 @@ function Dealer() {
 }
 Dealer.prototype.hit = function(card) {
   this.hand.push(card);
-  if (this.handTotal() >= 17)
+  if (this.handTotal() >= 17) {
     this.hitting = false;
+  }
 }
 Dealer.prototype.unDealtCards = function() {
   return this.hand.filter(function (card) {
     return !card.dealt;
-  })
-}
-Dealer.prototype.handTotal = function() {
-  if (this.hand.length === 0) return 0;
-  if (this.hand.length === 1)
-    return this.hand[0].amount;
-
-  var handValues = this.hand.map(function (card) {
-    return card.amount;
-  });
-
-  return handValues.reduce(function (a, b) {
-    return a + b;
   })
 }
 Dealer.prototype.discardHand = function() {
@@ -226,4 +237,40 @@ Dealer.prototype.bust = function() {
 }
 Dealer.prototype.twentyOne = function() {
   return this.handTotal() === 21;
+}
+Dealer.prototype.handTotal = function() {
+  if (this.hand.length === 1)
+    return this.hand[0].amount;
+
+  var aces = getAces(this.hand);
+  var regValues = getValues(getRegs(this.hand));
+  var handTotal = regValues.reduce(function (a, b) {
+    return a + b;
+  });
+
+  aces.forEach(function (value) {
+    handTotal += (handTotal < 11) ? 11 : 1;
+  });
+
+  return handTotal;
+
+
+  function getAces(hand) {
+    return hand.filter(function (card) {
+      return card.amount === 1;
+    })
+  }
+
+  function getRegs(hand) {
+    return hand.filter(function (card) {
+      return card.amount !== 1;
+    })
+  }
+
+  function getValues(hand) {
+    return hand.map(function (card) {
+      return card.amount;
+    });
+  }
+
 }

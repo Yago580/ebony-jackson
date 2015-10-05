@@ -2,6 +2,8 @@
 
 // automatic ace logic
 // account for ties
+// if dealer has > 17 and is going to lose.. dealer should hit
+// check hand at beginning of game
 
 // Game api
 var Game = (function() {
