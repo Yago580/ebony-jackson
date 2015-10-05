@@ -1,6 +1,7 @@
 "use strict";
 
-// automatic aces
+// automatic ace logic
+// account for ties
 
 // Game api
 var Game = (function() {
@@ -32,7 +33,9 @@ var Game = (function() {
     if (player.twentyOne()) return "21";
   }
 
-
+  exports.playerWins = function(player, dealer) {
+    return player.handTotal() > dealer.handTotal();
+  }
 
   return exports;
 })();
@@ -125,7 +128,7 @@ function dealHands() {
 function hitPlayer() {
   Game.dealCard(player);
   Dom.updateHand(player);
-  winOrBustCheck(player);
+  playerBustCheck(player);
 }
 
 function dealerTurn() {
@@ -133,12 +136,32 @@ function dealerTurn() {
     Game.dealCard(dealer);
     Dom.updateHand(dealer);
   }
+  findTheWinner();
 }
 
 
 // private
-function winOrBustCheck(player) {
+function playerBustCheck(player) {
   var handCheck = Game.checkHand(player);
-  if (handCheck === "bust") return playerLoses();
-  if (handCheck === "21")   return playerWins();
+  if (handCheck === 'bust') return playerLoses();
+  if (handCheck === '21')   return playerWins();
+}
+
+function findTheWinner() {
+  var handCheck = Game.checkHand(dealer);
+  if (handCheck === 'bust') return playerWins();
+  if (handCheck === "21")   return playerLoses();
+
+  if (Game.playerWins(player, dealer))
+    playerWins();
+  else
+    playerLoses();
+}
+
+function playerWins() {
+  console.log('you win!!!!');
+}
+
+function playerLoses() {
+  console.log('you lose!!!!');
 }

@@ -221,3 +221,9 @@ Dealer.prototype.discardHand = function() {
   this.hand = [];
   this.hitting = true;
 }
+Dealer.prototype.bust = function() {
+  return this.handTotal() > 21;
+}
+Dealer.prototype.twentyOne = function() {
+  return this.handTotal() === 21;
+}
