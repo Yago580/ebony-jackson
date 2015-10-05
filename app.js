@@ -178,17 +178,26 @@ Player.prototype.winBet = function(amount) {
 Player.prototype.discardHand = function() {
   this.hand = [];
 }
+Player.prototype.bust = function() {
+  return this.handTotal() > 21;
+}
+Player.prototype.twentyOne = function() {
+  return this.handTotal() === 21;
+}
 
 
 
 
 
 function Dealer() {
-  this.hand = [];
+  this.hand     = [];
   this.domClass = 'dealer';
+  this.hitting  = true;
 }
 Dealer.prototype.hit = function(card) {
   this.hand.push(card);
+  if (this.handTotal() >= 17)
+    this.hitting = false;
 }
 Dealer.prototype.unDealtCards = function() {
   return this.hand.filter(function (card) {
@@ -210,4 +219,5 @@ Dealer.prototype.handTotal = function() {
 }
 Dealer.prototype.discardHand = function() {
   this.hand = [];
+  this.hitting = true;
 }

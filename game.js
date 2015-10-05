@@ -1,16 +1,38 @@
 "use strict";
 
+// automatic aces
+
 // Game api
 var Game = (function() {
   var exports = {};
+  var deck;
 
-  exports.refreshHands = function(players) {
-    players.forEach(function (player) { player.discardHand(); })
+  exports.newGame = function(players) {
+    players.forEach(function (player) { player.discardHand(); });
+    deck = new Deck();
   }
 
-  exports.postBet = function(players, bet) {
-    players[0].postBet(bet)
+  exports.postBet = function(player, bet) {
+    player.postBet(bet)
   }
+
+  exports.dealHands = function(players) {
+    players.forEach(function (player) {
+      player.hit(deck.getCard());
+      player.hit(deck.getCard());
+    });
+  }
+
+  exports.dealCard = function(player) {
+    player.hit(deck.getCard());
+  }
+
+  exports.checkHand = function(player) {
+    if (player.bust()) return "bust";
+    if (player.twentyOne()) return "21";
+  }
+
+
 
   return exports;
 })();
@@ -42,17 +64,44 @@ var Dom = (function() {
     $('#currentBet').text(player.bet);
   }
 
+  exports.dealAllHands = function(players) {
+    players.forEach(function (player) {
+      this.updateHand(player);
+    }, this);
+  }
+
+  // figure out a way to clean this up
+  // also add more slots
+  exports.updateHand = function(player) {
+    var $freeSlots = $('.'+player.domClass+'-card-slot.free');
+    player.unDealtCards().forEach(function (card, index) {
+      appendCard(card, $($freeSlots[index]));
+    })
+  }
+
+  // private
+  function appendCard(card, slot) {
+    slot.removeClass('free').append(imageFrom(card));
+    card.dealt = true;
+  }
+
+  function imageFrom(card) {
+    return $('<img>').attr('class', 'card').attr('src', card.image);
+  }
+
   return exports;
 })();
 
 
 
-
-var players = [new Player('Yag'), new Dealer()];
+var deck        = new Deck();
+var player      = new Player('Yag');
+var dealer      = new Dealer();
+var allPlayers  = [player, dealer];
 
 
 function newGame() {
-  Game.refreshHands(players);
+  Game.newGame(allPlayers);
   Dom.removeCards();
   Dom.toggleButton(event.target, '#betControls');
 }
@@ -61,7 +110,35 @@ function postBet() {
   event.preventDefault();
   var bet = Dom.getBet(event.target);
 
-  Game.postBet(players, bet);
-  Dom.updateBalance(players[0]);
+  Game.postBet(player, bet);
+  Dom.updateBalance(player);
   Dom.toggleButton(event.target, '#deal');
+}
+
+function dealHands() {
+  Game.dealHands(allPlayers);
+  Dom.dealAllHands(allPlayers);
+  Dom.toggleButton(event.target, '.hitStay');
+  // need to check for 21
+}
+
+function hitPlayer() {
+  Game.dealCard(player);
+  Dom.updateHand(player);
+  winOrBustCheck(player);
+}
+
+function dealerTurn() {
+  while (dealer.hitting) {
+    Game.dealCard(dealer);
+    Dom.updateHand(dealer);
+  }
+}
+
+
+// private
+function winOrBustCheck(player) {
+  var handCheck = Game.checkHand(player);
+  if (handCheck === "bust") return playerLoses();
+  if (handCheck === "21")   return playerWins();
 }
