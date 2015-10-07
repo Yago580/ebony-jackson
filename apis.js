@@ -6,6 +6,7 @@ var Dom = (function() {
   var exports = {};
 
   exports.newGame = function() {
+    $('.card-slot').remove();
     $('.control').hide();
     $('#beginGame').show();
     $('.card-slot').empty();
