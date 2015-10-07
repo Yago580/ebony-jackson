@@ -14,13 +14,7 @@ var Dom = (function() {
     $('#gameMessage').text('');
   }
 
-  exports.toggleButton = function(turnOff, turnOn) {
-    $(turnOff).hide();
-    $(turnOn).show();
-  }
-
   exports.getBet = function(target) {
-    // need to uncheck radio button after it gets hidden
     var $button = $(target).children('input[type="radio"]:checked');
     $button.prop('checked', false);
     return parseInt($button.val());
@@ -37,12 +31,10 @@ var Dom = (function() {
     }, this);
   }
 
-  // figure out a way to clean this up
-  // also add more slots
   exports.updateHand = function(player) {
-    var $freeSlots = $('.'+player.domClass+'-card-slot.free');
-    player.unDealtCards().forEach(function (card, index) {
-      appendCard(card, $($freeSlots[index]));
+    player.hand.forEach(function (card, index) {
+      if (!card.dealt)
+        buildCard(player, card, index)
     })
   }
 
@@ -79,6 +71,18 @@ var Dom = (function() {
 
   function imageFrom(card) {
     return $('<img>').attr('class', 'card').attr('src', card.image);
+  }
+
+  function buildCard(player, card, index) {
+    var cardSlot = 
+      $('<div>')
+        .addClass('card-slot')
+        .attr('id', player.domClass+'-card-slot'+index)
+        .css({top: player.topPos, left: 325 + (index * 50), position: 'fixed'})
+
+    cardSlot.append(imageFrom(card));
+
+    $('.tableContainer').append(cardSlot);
   }
 
   return exports;

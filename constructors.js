@@ -57,8 +57,9 @@ Deck.prototype.getCard = function() {
 function User(name) {
   this.name     = name;
   this.balance  = 2000;
-  this.domClass = 'player';
   this.bet      = 0;
+  this.domClass = 'player';
+  this.topPos   = 415;
 }
 User.prototype = Object.create(CardPlayer.prototype);
 User.prototype.postBet = function(amount) {
@@ -77,9 +78,10 @@ User.prototype.loseBet = function() {
 
 
 function Dealer() {
-  this.domClass = 'dealer';
   this.hitting  = true;
   this.deck     = new Deck();
+  this.domClass = 'dealer';
+  this.topPos   = 75;
 }
 Dealer.prototype = Object.create(CardPlayer.prototype);
 Dealer.prototype.hit = function(card) {
