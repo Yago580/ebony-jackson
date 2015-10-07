@@ -10,17 +10,16 @@
 // 21 on deal should automatically stop game and win
 // if dealer has 17 with an ace they should hit again?
 
-// var deck        = new Deck();
+
 var player      = new User('Yag');
 var dealer      = new Dealer();
 var allPlayers  = [player, dealer];
+
 
 Dom.updateBalance(player);
 
 
 function newGame() {
-  // Game.newGame(allPlayers);
-
   refreshHands();
   Dom.newGame();
   Dom.toggleButton(event.target, '#betControls');
@@ -30,23 +29,16 @@ function postBet() {
   event.preventDefault();
   var bet = Dom.getBet(event.target);
 
-  // Game.postBet(player, bet);
-
   player.postBet(bet);
   Dom.updateBalance(player);
   Dom.toggleButton(event.target, '#deal');
 }
 
 function dealHands() {
-  // Game.dealHands(allPlayers);
-  
-
   dealer.dealHands(allPlayers);
   Dom.dealAllHands(allPlayers);
   Dom.toggleButton(event.target, '.hitStay');
 
-
-  // debugger
   if (player.twentyOne())
     playerWins();
   else if (dealer.twentyOne())
@@ -54,9 +46,6 @@ function dealHands() {
 }
 
 function hitPlayer() {
-  // Game.dealCard(player);
-  // playerBustCheck(player);
-
   dealer.dealCard(player);
   Dom.updateHand(player);
 
@@ -81,25 +70,10 @@ function dealerTurn() {
 }
 
 
+
+
+
 // private
-// function playerBustCheck(player) {
-//   var handCheck = Game.checkHand(player);
-//   if (handCheck === 'bust') return playerLoses();
-//   if (handCheck === '21')   return playerWins();
-// }
-
-// function findTheWinner() {
-//   var handCheck = Game.checkHand(dealer);
-//   if (handCheck === 'bust') return playerWins();
-//   if (handCheck === "21")   return playerLoses();
-
-//   if (Game.playerWins(player, dealer))
-//     playerWins();
-//   else
-//     playerLoses();
-// }
-
-
 function findWinner() {
   player.handTotal() > dealer.handTotal() ? playerWins() : playerLoses()
 }

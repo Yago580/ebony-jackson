@@ -1,55 +1,5 @@
 "use strict";
 
-// Game api
-var Game = (function() {
-  var exports = {};
-  var deck;
-
-  // exports.newGame = function(players) {
-  //   players.forEach(function (player) { player.discardHand(); });
-  //   deck = new Deck();
-  // }
-
-  exports.postBet = function(player, bet) {
-    player.postBet(bet)
-  }
-
-  exports.dealHands = function(players) {
-    players.forEach(function (player) {
-      player.hit(deck.getCard());
-      player.hit(deck.getCard());
-    });
-  }
-
-  exports.dealCard = function(player) {
-    player.hit(deck.getCard());
-  }
-
-  exports.checkHand = function(player) {
-    if (player.bust()) return "bust";
-    if (player.twentyOne()) return "21";
-  }
-
-  exports.playerWins = function(player, dealer) {
-    return player.handTotal() > dealer.handTotal();
-  }
-
-  // exports.checkForBusts = function(players) {
-  //   return players.filter(function (player) {
-  //     return player.bust();
-  //   });
-  // }
-
-  // exports.checkForBlackJack = function(players) {
-  //   return players.filter(function (player) {
-  //     return player.twentyOne();
-  //   });
-  // }
-
-  return exports;
-})();
-
-
 
 // Dom api
 var Dom = (function() {
