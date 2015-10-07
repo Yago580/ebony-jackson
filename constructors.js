@@ -1,11 +1,12 @@
 "use strict";
 
 function Card(name, suit) {
-  this.name  = name;
-  this.suit  = suit;
-  this.amount = getValue();
-  this.image = imageUrl();
-  this.dealt = false;
+  this.name      = name;
+  this.suit      = suit;
+  this.amount    = getValue();
+  this.image     = imageUrl();
+  this.imageBack = 'images/cards/card_Back.png';
+  this.dealt     = false;
 
   function getValue() {
     var faceCards = {'A':1, 'J':10, 'Q':10, 'K':10}
@@ -16,6 +17,12 @@ function Card(name, suit) {
   function imageUrl() {
     return '/images/cards/card_'+name+suit+'.png'
   }
+}
+Card.prototype.hide = function() {
+  this.hidden = true;
+}
+Card.prototype.show = function() {
+  this.hidden = false;
 }
 
 
@@ -98,6 +105,12 @@ Dealer.prototype.dealHands = function(players) {
     player.hit(this.deck.getCard());
     player.hit(this.deck.getCard());
   }, this)
+}
+Dealer.prototype.hideCard = function() {
+  this.hand[1].hide();
+}
+Dealer.prototype.showCard = function() {
+  this.hand[1].show();
 }
 
 

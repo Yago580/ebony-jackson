@@ -7,6 +7,7 @@
         <header>
             Balance: <span id="balance"></span> | Current Bet: <span id="currentBet"></span>
         </header>
+        
         <div class="tableContainer">
             <img src="images/table.png" alt="table">
         </div>
@@ -23,9 +24,9 @@
             </form>
 
             <button id="deal" onclick="dealHands()" class="control" hidden>Deal</button>
-            <div class="hitStay control" hidden>
-                <button id="hit" onclick="hitPlayer()">Hit</button>
-                <button id="stay" onclick="dealerTurn()">Stay</button>
+            <div class="hitStand control" hidden>
+                <button onclick="hitPlayer()">Hit</button>
+                <button onclick="dealerTurn()">Stand</button>
             </div>
         </div>
 

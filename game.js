@@ -25,6 +25,7 @@ function postBet() {
 
 function dealHands() {
   dealer.dealHands(allPlayers);
+  dealer.hideCard();
   Dom.dealHands(allPlayers);
 
   if (player.twentyOne())
@@ -32,7 +33,7 @@ function dealHands() {
   else if (dealer.twentyOne())
     playerLoses();
 
-  Dom.hitStayButtons(event.target);
+  Dom.hitStandButtons(event.target);
 }
 
 function hitPlayer() {
@@ -46,6 +47,8 @@ function hitPlayer() {
 }
 
 function dealerTurn() {
+  dealer.showCard();
+  
   while (dealer.hitting) {
     dealer.dealCard(dealer);
     Dom.updateHand(dealer);

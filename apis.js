@@ -28,7 +28,10 @@ var Dom = (function() {
 
   exports.dealHands = function(players) {
     players.forEach(function (player) {
-      this.updateHand(player);
+      if (player instanceof Dealer)
+        this.hideDealerCard(player);
+      else
+        this.updateHand(player);
     }, this);
   }
 
@@ -37,6 +40,11 @@ var Dom = (function() {
       if (!card.dealt)
         buildCard(player, card, index)
     })
+  }
+
+  exports.hideDealerCard = function(dealer) {
+    buildCard(dealer, dealer.hand[0], 0);
+    buildCard(dealer, dealer.hand[1], 1, true)
   }
 
   exports.gameMessage = function(message) {
@@ -59,9 +67,9 @@ var Dom = (function() {
     $('#deal').show();
   }
 
-  exports.hitStayButtons = function(target) {
+  exports.hitStandButtons = function(target) {
     $(target).hide();
-    $('.hitStay').show();
+    $('.hitStand').show();
   }
 
   // private
@@ -71,7 +79,8 @@ var Dom = (function() {
   }
 
   function imageFrom(card) {
-    return $('<img>').attr('class', 'card').attr('src', card.image);
+    var src = card.hidden ? card.imageBack : card.image
+    return $('<img>').attr('class', 'card').attr('src', src);
   }
 
   function buildCard(player, card, index) {
@@ -81,7 +90,7 @@ var Dom = (function() {
         .attr('id', player.domClass+'-card-slot'+index)
         .css({top: player.topPos, left: 325 + (index * 50), position: 'fixed'})
 
-    cardSlot.append(imageFrom(card));
+      cardSlot.append(imageFrom(card));
 
     $('.tableContainer').append(cardSlot);
   }
