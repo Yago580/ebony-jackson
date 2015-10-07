@@ -73,10 +73,14 @@ function findTheWinner() {
 
 function playerWins() {
   Dom.gameMessage('You win!');
+  player.winBet();
+  Dom.updateBalance(player);
   Dom.newGamePrompt();
 }
 
 function playerLoses() {
   Dom.gameMessage('You lose!');
+  player.loseBet();
+  Dom.updateBalance(player);
   Dom.newGamePrompt();
 }

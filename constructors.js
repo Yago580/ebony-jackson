@@ -65,8 +65,12 @@ User.prototype.postBet = function(amount) {
   this.balance -= amount;
   this.bet = amount;
 }
-User.prototype.winBet = function(amount) {
-  this.balance += amount * 2;
+User.prototype.winBet = function() {
+  this.balance += this.bet * 2;
+  this.bet = 0;
+}
+User.prototype.loseBet = function() {
+  this.bet = 0;
 }
 
 

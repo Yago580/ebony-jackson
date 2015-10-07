@@ -60,6 +60,7 @@ var Dom = (function() {
   exports.getBet = function(target) {
     // need to uncheck radio button after it gets hidden
     var $button = $(target).children('input[type="radio"]:checked');
+    $button.prop('checked', false);
     return parseInt($button.val());
   }
 
