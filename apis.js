@@ -5,10 +5,10 @@ var Game = (function() {
   var exports = {};
   var deck;
 
-  exports.newGame = function(players) {
-    players.forEach(function (player) { player.discardHand(); });
-    deck = new Deck();
-  }
+  // exports.newGame = function(players) {
+  //   players.forEach(function (player) { player.discardHand(); });
+  //   deck = new Deck();
+  // }
 
   exports.postBet = function(player, bet) {
     player.postBet(bet)
@@ -33,6 +33,18 @@ var Game = (function() {
   exports.playerWins = function(player, dealer) {
     return player.handTotal() > dealer.handTotal();
   }
+
+  // exports.checkForBusts = function(players) {
+  //   return players.filter(function (player) {
+  //     return player.bust();
+  //   });
+  // }
+
+  // exports.checkForBlackJack = function(players) {
+  //   return players.filter(function (player) {
+  //     return player.twentyOne();
+  //   });
+  // }
 
   return exports;
 })();

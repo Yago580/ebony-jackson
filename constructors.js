@@ -79,6 +79,7 @@ User.prototype.loseBet = function() {
 function Dealer() {
   this.domClass = 'dealer';
   this.hitting  = true;
+  this.deck     = new Deck();
 }
 Dealer.prototype = Object.create(CardPlayer.prototype);
 Dealer.prototype.hit = function(card) {
@@ -86,6 +87,15 @@ Dealer.prototype.hit = function(card) {
   if (this.handTotal() >= 17) {
     this.hitting = false;
   }
+}
+Dealer.prototype.dealCard = function(player) {
+  player.hit(this.deck.getCard());
+}
+Dealer.prototype.dealHands = function(players) {
+  players.forEach(function (player) {
+    player.hit(this.deck.getCard());
+    player.hit(this.deck.getCard());
+  }, this)
 }
 
 
