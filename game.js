@@ -4,9 +4,6 @@
 // allow for more cards and make card positioning better
 // redesign ace logic... 2 aces sometimes comes out to 11 and 1
   // instead of 1 and 1
-// possibly hideAll() and showAll() functions for dom api
-  // instead of toggleButton
-// 21 on deal should automatically stop game and win
 // if dealer has 17 with an ace they should hit again?
 
 
@@ -36,12 +33,13 @@ function postBet() {
 function dealHands() {
   dealer.dealHands(allPlayers);
   Dom.dealHands(allPlayers);
-  Dom.hitStayButtons(event.target);
 
   if (player.twentyOne())
     playerWins();
   else if (dealer.twentyOne())
     playerLoses();
+
+  Dom.hitStayButtons(event.target);
 }
 
 function hitPlayer() {
