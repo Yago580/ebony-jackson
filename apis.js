@@ -1,6 +1,5 @@
 "use strict";
 
-
 // Dom api
 var Dom = (function() {
   var exports = {};
@@ -9,8 +8,6 @@ var Dom = (function() {
     $('.card-slot').remove();
     $('.control').hide();
     $('#beginGame').show();
-    $('.card-slot').empty();
-    $('.card-slot').addClass('free');
     $('#playAgainPrompt').text('');
     $('#gameMessage').text('');
   }
@@ -28,10 +25,7 @@ var Dom = (function() {
 
   exports.dealHands = function(players) {
     players.forEach(function (player) {
-      if (player instanceof Dealer)
-        this.hideDealerCard(player);
-      else
-        this.updateHand(player);
+      this.updateHand(player);
     }, this);
   }
 
@@ -40,11 +34,6 @@ var Dom = (function() {
       if (!card.dealt)
         buildCard(player, card, index)
     })
-  }
-
-  exports.hideDealerCard = function(dealer) {
-    buildCard(dealer, dealer.hand[0], 0);
-    buildCard(dealer, dealer.hand[1], 1, true)
   }
 
   exports.gameMessage = function(message) {

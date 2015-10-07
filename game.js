@@ -1,3 +1,9 @@
+// validate bets
+// add more money
+// display hand total to user
+// display hand comparison
+// possibly double down logic
+
 "use strict";
 
 var player      = new User('Yag');
@@ -48,7 +54,7 @@ function hitPlayer() {
 
 function dealerTurn() {
   dealer.showCard();
-  
+
   while (dealer.hitting) {
     dealer.dealCard(dealer);
     Dom.updateHand(dealer);
@@ -72,7 +78,7 @@ function dealerTurn() {
 
 
 
-// private
+// Helpers
 function findWinner() {
   player.handTotal() > dealer.handTotal() ? playerWins() : playerLoses()
 }
