@@ -38,6 +38,10 @@ div#player-slot-4{
   left:475px;
   top:415px;
 }
+div#player-slot-5{
+  left:525px;
+  top:415px;
+}
 
 div#dealer-slot-1{
   left:325px;
@@ -56,6 +60,10 @@ div#dealer-slot-3{
 
 div#dealer-slot-4{
   left:475px;
+  top:75px;
+}
+div#dealer-slot-5{
+  left:525px;
   top:75px;
 }
 

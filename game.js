@@ -1,18 +1,5 @@
 "use strict";
 
-// if dealer has > 17 and is going to lose.. dealer should hit
-
-
-// allow for more cards and make card positioning better
-
-
-// redesign ace logic... 2 aces sometimes comes out to 11 and 1
-  // instead of 1 and 1
-
-
-// if dealer has 17 with an ace they should hit again?
-
-
 var player      = new User('Yag');
 var dealer      = new Dealer();
 var allPlayers  = [player, dealer];
