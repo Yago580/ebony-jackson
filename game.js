@@ -15,6 +15,8 @@ var player      = new User('Yag');
 var dealer      = new Dealer();
 var allPlayers  = [player, dealer];
 
+Dom.updateBalance(player);
+
 
 function newGame() {
   Game.newGame(allPlayers);
