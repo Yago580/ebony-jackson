@@ -132,9 +132,16 @@ CardPlayer.prototype.handTotal = function() {
     return a + b;
   });
 
-  aces.forEach(function (value) {
-    handTotal += (handTotal < 11) ? 11 : 1;
-  });
+  if (aces.length > 1 && handTotal > 9) {
+    aces.forEach(function (value) {
+      handTotal += 1;
+    })
+  } else {
+    aces.forEach(function (value) {
+      handTotal += (handTotal < 11) ? 11 : 1;
+    });
+  }
+
 
   return handTotal;
 

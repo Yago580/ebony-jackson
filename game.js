@@ -1,9 +1,15 @@
 "use strict";
 
 // if dealer has > 17 and is going to lose.. dealer should hit
+
+
 // allow for more cards and make card positioning better
+
+
 // redesign ace logic... 2 aces sometimes comes out to 11 and 1
   // instead of 1 and 1
+
+
 // if dealer has 17 with an ace they should hit again?
 
 
@@ -58,12 +64,18 @@ function dealerTurn() {
     Dom.updateHand(dealer);
   }
 
-  if (dealer.twentyOne())
-    playerLoses();
-  else if (dealer.bust())
-    playerWins();
-  else
-    findWinner();
+  if(dealerWinOrBust())
+    return;
+
+  while (dealer.handTotal() < player.handTotal()) {
+    dealer.dealCard(dealer);
+    Dom.updateHand(dealer);
+  }
+
+  if (dealerWinOrBust())
+    return;
+    
+  findWinner();
 }
 
 
@@ -78,7 +90,18 @@ function findWinner() {
 function refreshHands() {
   allPlayers.forEach(function (player) {
     player.discardHand();
+    player.hitting = true;
   })
+}
+
+function dealerWinOrBust() {
+  if (dealer.twentyOne()) {
+    playerLoses();
+    return true;
+  } else if (dealer.bust()) {
+    playerWins();
+    return true;
+  }
 }
 
 function playerWins() {
