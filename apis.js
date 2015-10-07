@@ -43,9 +43,13 @@ var Game = (function() {
 var Dom = (function() {
   var exports = {};
 
-  exports.removeCards = function() {
+  exports.newGame = function() {
+    $('.control').hide();
+    $('#beginGame').show();
     $('.card-slot').empty();
     $('.card-slot').addClass('free');
+    $('#playAgainPrompt').text('');
+    $('#gameMessage').text('');
   }
 
   exports.toggleButton = function(turnOff, turnOn) {
@@ -77,6 +81,16 @@ var Dom = (function() {
     player.unDealtCards().forEach(function (card, index) {
       appendCard(card, $($freeSlots[index]));
     })
+  }
+
+  exports.gameMessage = function(message) {
+    $('#gameMessage').text(message);
+  }
+
+  exports.newGamePrompt = function() {
+    $('.control').hide();
+    $('#beginGame').show();
+    $('#playAgainPrompt').text('Would you like play again?');
   }
 
   // private

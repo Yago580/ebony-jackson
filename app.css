@@ -63,3 +63,7 @@ img.card{
   width:120px;
   height:170px;
 }
+
+div.messages{
+  text-align:center;
+}

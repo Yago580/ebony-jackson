@@ -8,6 +8,7 @@
   // instead of 1 and 1
 // possibly hideAll() and showAll() functions for dom api
   // instead of toggleButton
+// 21 on deal should automatically stop game and win
 
 var deck        = new Deck();
 var player      = new User('Yag');
@@ -17,7 +18,7 @@ var allPlayers  = [player, dealer];
 
 function newGame() {
   Game.newGame(allPlayers);
-  Dom.removeCards();
+  Dom.newGame();
   Dom.toggleButton(event.target, '#betControls');
 }
 
@@ -71,9 +72,11 @@ function findTheWinner() {
 }
 
 function playerWins() {
-  alert('you win!!!!');
+  Dom.gameMessage('You win!');
+  Dom.newGamePrompt();
 }
 
 function playerLoses() {
-  alert('you lose!!!!');
+  Dom.gameMessage('You lose!');
+  Dom.newGamePrompt();
 }
