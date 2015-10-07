@@ -3,6 +3,7 @@
 // display hand total to user
 // display hand comparison
 // possibly double down logic
+// bet persistence
 
 "use strict";
 
@@ -34,10 +35,13 @@ function dealHands() {
   dealer.hideCard();
   Dom.dealHands(allPlayers);
 
-  if (player.twentyOne())
+  if (player.twentyOne()) {
     playerWins();
-  else if (dealer.twentyOne())
+  } else if (dealer.twentyOne()) {
+    dealer.showCard();
+    Dom.updateHand(dealer);
     playerLoses();
+  }
 
   Dom.hitStandButtons(event.target);
 }
@@ -54,6 +58,7 @@ function hitPlayer() {
 
 function dealerTurn() {
   dealer.showCard();
+  Dom.updateHand(dealer);
 
   while (dealer.hitting) {
     dealer.dealCard(dealer);

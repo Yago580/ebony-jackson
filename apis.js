@@ -32,7 +32,7 @@ var Dom = (function() {
   exports.updateHand = function(player) {
     player.hand.forEach(function (card, index) {
       if (!card.dealt)
-        buildCard(player, card, index)
+        appendCard(player, card, index);
     })
   }
 
@@ -62,26 +62,23 @@ var Dom = (function() {
   }
 
   // private
-  function appendCard(card, slot) {
-    slot.removeClass('free').append(imageFrom(card));
-    card.dealt = true;
-  }
-
   function imageFrom(card) {
     var src = card.hidden ? card.imageBack : card.image
     return $('<img>').attr('class', 'card').attr('src', src);
   }
 
-  function buildCard(player, card, index) {
-    var cardSlot = 
-      $('<div>')
-        .addClass('card-slot')
-        .attr('id', player.domClass+'-card-slot'+index)
-        .css({top: player.topPos, left: 325 + (index * 50), position: 'fixed'})
-
-      cardSlot.append(imageFrom(card));
-
+  function appendCard(player, card, index) {
+    var cardSlot = cardSlotFrom(player, index);
+    
+    cardSlot.append(imageFrom(card));
     $('.tableContainer').append(cardSlot);
+  }
+
+  function cardSlotFrom(player, index) {
+    return $('<div>')
+              .addClass('card-slot')
+              .attr('id', player.domClass+'-card-slot'+index)
+              .css({top: player.topPos, left: 325 + (index * 50), position: 'fixed'});
   }
 
   return exports;
