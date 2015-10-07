@@ -1,7 +1,6 @@
 "use strict";
 
 // if dealer has > 17 and is going to lose.. dealer should hit
-// check hand at beginning of game
 // allow for more cards and make card positioning better
 // redesign ace logic... 2 aces sometimes comes out to 11 and 1
   // instead of 1 and 1
@@ -22,7 +21,7 @@ Dom.updateBalance(player);
 function newGame() {
   refreshHands();
   Dom.newGame();
-  Dom.toggleButton(event.target, '#betControls');
+  Dom.betControls(event.target);
 }
 
 function postBet() {
@@ -31,13 +30,13 @@ function postBet() {
 
   player.postBet(bet);
   Dom.updateBalance(player);
-  Dom.toggleButton(event.target, '#deal');
+  Dom.dealButton(event.target);
 }
 
 function dealHands() {
   dealer.dealHands(allPlayers);
-  Dom.dealAllHands(allPlayers);
-  Dom.toggleButton(event.target, '.hitStay');
+  Dom.dealHands(allPlayers);
+  Dom.hitStayButtons(event.target);
 
   if (player.twentyOne())
     playerWins();

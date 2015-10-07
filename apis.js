@@ -31,7 +31,7 @@ var Dom = (function() {
     $('#currentBet').text(player.bet);
   }
 
-  exports.dealAllHands = function(players) {
+  exports.dealHands = function(players) {
     players.forEach(function (player) {
       this.updateHand(player);
     }, this);
@@ -54,6 +54,21 @@ var Dom = (function() {
     $('.control').hide();
     $('#beginGame').show();
     $('#playAgainPrompt').text('Would you like play again?');
+  }
+
+  exports.betControls = function(target) {
+    $(target).hide();
+    $('#betControls').show();
+  }
+
+  exports.dealButton = function(target) {
+    $(target).hide();
+    $('#deal').show();
+  }
+
+  exports.hitStayButtons = function(target) {
+    $(target).hide();
+    $('.hitStay').show();
   }
 
   // private
