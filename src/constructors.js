@@ -62,6 +62,7 @@ Deck.prototype.getCard = function() {
 
 
 function User(name) {
+  CardPlayer.call(this);
   this.name     = name;
   this.balance  = 2000;
   this.bet      = 0;
@@ -85,6 +86,7 @@ User.prototype.loseBet = function() {
 
 
 function Dealer() {
+  CardPlayer.call(this);
   this.hitting  = true;
   this.deck     = new Deck();
   this.domClass = 'dealer';
@@ -130,16 +132,13 @@ CardPlayer.prototype.unDealtCards = function() {
 }
 CardPlayer.prototype.discardHand = function() {
   this.hand = [];
-}
-CardPlayer.prototype.bust = function() {
-  return this.handTotal() > 21;
-}
-CardPlayer.prototype.twentyOne = function() {
-  return this.handTotal() === 21;
+  this.hitting = true;
 }
 CardPlayer.prototype.handTotal = function() {
   if (this.hand.length === 1)
     return this.hand[0].amount;
+  else if (this.hand.length === 0)
+    return 0;
 
   var aces = getAces(this.hand);
   var regValues = getValues(getRegs(this.hand));
@@ -178,4 +177,10 @@ CardPlayer.prototype.handTotal = function() {
     });
   }
 
+}
+CardPlayer.prototype.bust = function() {
+  return this.handTotal() > 21;
+}
+CardPlayer.prototype.twentyOne = function() {
+  return this.handTotal() === 21;
 }
