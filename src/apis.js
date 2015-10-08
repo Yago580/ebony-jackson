@@ -14,6 +14,8 @@ var Dom = (function() {
 
   exports.getBet = function(target) {
     var $button = $(target).children('input[type="radio"]:checked');
+    if ($button.length === 0)
+      return null;
     $button.prop('checked', false);
     return parseInt($button.val());
   }

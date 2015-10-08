@@ -25,9 +25,12 @@ function postBet() {
   event.preventDefault();
   var bet = Dom.getBet(event.target);
 
-  player.postBet(bet);
-  Dom.updateBalance(player);
-  Dom.dealButton(event.target);
+  if (bet) {
+    player.postBet(bet);
+    Dom.updateBalance(player);
+    Dom.dealButton(event.target);
+  }
+
 }
 
 function dealHands() {
