@@ -87,7 +87,7 @@ describe("User", function() {
 
     it("should decrement user's balance by current bet", function() {
       user.doubleDown();
-      expect(user.balance).toEqual(balance - (bet * 2))
+      expect(user.balance).toEqual(balance - bet)
     });
   });
 

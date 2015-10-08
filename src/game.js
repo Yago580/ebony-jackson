@@ -1,11 +1,10 @@
 // add split pair logic
-// tie should 'push'
-// blackjack should play 3 to 2
 // bet persistence
 // show dealer hand total after card is no longer hidden
 // if you win on deal you shouldn't have control buttons still
 // make buttons very close together, big, and easy to use
 // what happens if player and dealer both get 21 on the draw??
+// plus sign animation on balance when you win, minus when u lose
 
 "use strict";
 
@@ -44,9 +43,11 @@ function dealHands() {
 
   if (player.twentyOne()) {
     playerWins();
+    Dom.hideControls();
   } else if (dealer.twentyOne()) {
     dealer.showCard();
     Dom.updateHand(dealer);
+    Dom.hideControls();
     playerLoses();
   }
 
@@ -138,4 +139,6 @@ function playerLoses() {
 function playerPush() {
   Dom.gameMessage('Push!');
   player.pushBet();
+  Dom.updateBalance(player);
+  Dom.newGamePrompt();
 }
