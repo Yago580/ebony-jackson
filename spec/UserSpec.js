@@ -4,10 +4,11 @@ describe("User", function() {
   var balance;
 
   beforeEach(function() {
-    user = new User('Yag');
-    user.bet = 1000;
-    bet = user.bet;
-    balance = user.balance
+    user          = new User('Yag');
+    user.bet      = 1000;
+    user.balance -= 1000;
+    bet           = user.bet;
+    balance       = user.balance
   });
 
   it("should have a #name", function() {
@@ -54,7 +55,6 @@ describe("User", function() {
     });
 
     it("should increment user balance by current bet * 2", function() {
-      // user.bet = 1000;
       user.winBet();
       expect(user.balance).toEqual(balance + (bet * 2));
     });
@@ -68,13 +68,11 @@ describe("User", function() {
     });
 
     it("should set user's current bet to 0", function() {
-      // user.bet = 1000;
       user.loseBet();
       expect(user.bet).toEqual(0);
     });
 
-    it("should not increment user's balancea at all", function() {
-      // user.bet = 1000;
+    it("should not increment user's balance at all", function() {
       user.loseBet();
       expect(user.balance).toEqual(balance);
     });
@@ -82,7 +80,7 @@ describe("User", function() {
   });
 
   describe("#doubleDown", function() {
-    it("should double player's bet.", function() {
+    it("should double users's bet.", function() {
       user.doubleDown();
       expect(user.bet).toEqual(bet * 2);
     });
@@ -90,6 +88,30 @@ describe("User", function() {
     it("should decrement user's balance by current bet", function() {
       user.doubleDown();
       expect(user.balance).toEqual(balance - (bet * 2))
+    });
+  });
+
+  describe("#pushBet", function() {
+    it("should return user's bet to their balance", function() {
+      user.pushBet();
+      expect(user.balance).toEqual(balance + bet);
+    });
+
+    it("should set user's bet back to 0", function() {
+      user.pushBet();
+      expect(user.bet).toEqual(0);
+    });
+  });
+
+  describe("#blackJack", function() {
+    it("should increment user's balance by bet * 1.5", function() {
+      user.blackJack();
+      expect(user.balance).toEqual(balance + (bet + bet * 1.5));
+    });
+
+    it("should set user's bet back to 0", function() {
+      user.blackJack();
+      expect(user.bet).toEqual(0);
     });
   });
 

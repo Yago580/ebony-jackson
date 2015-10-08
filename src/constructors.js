@@ -86,6 +86,14 @@ User.prototype.winBet = function() {
 User.prototype.loseBet = function() {
   this.bet = 0;
 }
+User.prototype.pushBet = function() {
+  this.balance += this.bet;
+  this.bet = 0;
+}
+User.prototype.blackJack = function() {
+  this.balance += (this.bet + this.bet * 1.5);
+  this.bet = 0;
+}
 
 
 

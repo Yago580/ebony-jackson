@@ -1,11 +1,11 @@
 // add split pair logic
-// dealer stops hitting at 17 hard
 // tie should 'push'
 // blackjack should play 3 to 2
 // bet persistence
 // show dealer hand total after card is no longer hidden
 // if you win on deal you shouldn't have control buttons still
 // make buttons very close together, big, and easy to use
+// what happens if player and dealer both get 21 on the draw??
 
 "use strict";
 
@@ -23,6 +23,7 @@ function newGame() {
   Dom.betControls(event.target);
 }
 
+
 function postBet() {
   event.preventDefault();
   var bet = Dom.getBet(event.target);
@@ -34,6 +35,7 @@ function postBet() {
   }
 
 }
+
 
 function dealHands() {
   dealer.dealHands(allPlayers);
@@ -51,6 +53,7 @@ function dealHands() {
   Dom.hitStandButtons(event.target);
 }
 
+
 function hitPlayer() {
   dealer.dealCard(player);
   Dom.updateHand(player);
@@ -61,11 +64,13 @@ function hitPlayer() {
     playerLoses();
 }
 
+
 function doubleDown() {
   player.doubleDown();
   dealer.doubleDown(player);
   Dom.updateHand(player);
   Dom.updateBalance(player);
+  Dom.hideControls();
 
   if(player.twentyOne())
     playerWins();
@@ -74,6 +79,7 @@ function doubleDown() {
   else
     setTimeout(dealerTurn, 1500);
 }
+
 
 function dealerTurn() {
   dealer.showCard();
@@ -84,18 +90,15 @@ function dealerTurn() {
     Dom.updateHand(dealer);
   }
 
-  if(dealerWinOrBust())
-    return;
-
-  while (dealer.handTotal() < player.handTotal()) {
-    dealer.dealCard(dealer);
-    Dom.updateHand(dealer);
-  }
-
-  if (dealerWinOrBust())
-    return;
-    
-  findWinner();
+  if (dealer.twentyOne()) {
+    playerLoses();
+  } else if (dealer.bust()) {
+    playerWins();
+  } else if (tie()) {
+    playerPush();
+  } else {
+    findWinner();
+  } 
 }
 
 
@@ -107,21 +110,15 @@ function findWinner() {
   player.handTotal() > dealer.handTotal() ? playerWins() : playerLoses()
 }
 
+function tie() {
+  return player.handTotal() === dealer.handTotal();
+}
+
 function refreshHands() {
   allPlayers.forEach(function (player) {
     player.discardHand();
     player.hitting = true;
   })
-}
-
-function dealerWinOrBust() {
-  if (dealer.twentyOne()) {
-    playerLoses();
-    return true;
-  } else if (dealer.bust()) {
-    playerWins();
-    return true;
-  }
 }
 
 function playerWins() {
@@ -136,4 +133,9 @@ function playerLoses() {
   player.loseBet();
   Dom.updateBalance(player);
   Dom.newGamePrompt();
+}
+
+function playerPush() {
+  Dom.gameMessage('Push!');
+  player.pushBet();
 }
