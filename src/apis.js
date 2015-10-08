@@ -23,6 +23,7 @@ var Dom = (function() {
   exports.updateBalance = function(player) {
     $('#balance').text(player.balance);
     $('#currentBet').text(player.bet);
+    updateHandTotal(player);
   }
 
   exports.dealHands = function(players) {
@@ -36,6 +37,7 @@ var Dom = (function() {
       if (!card.dealt)
         appendCard(player, card, index);
     })
+    updateHandTotal(player);
   }
 
   exports.gameMessage = function(message) {
@@ -80,7 +82,11 @@ var Dom = (function() {
     return $('<div>')
               .addClass('card-slot')
               .attr('id', player.domClass+'-card-slot'+index)
-              .css({top: player.topPos, left: 325 + (index * 50), position: 'fixed'});
+              .css({top: player.topPos + (index * player.direction), left: 325 + (index * 35), position: 'fixed'});
+  }
+
+  function updateHandTotal(player) {
+    $('#'+player.domClass+'-handTotal').text(player.handTotal());
   }
 
   return exports;

@@ -1,7 +1,10 @@
-// display hand total to user
-// display hand comparison
-// possibly double down logic
+// add double down logic
+// add split pair logic
+// dealer stops hitting at 17 hard
+// tie should 'push'
+// blackjack should play 3 to 2
 // bet persistence
+// show dealer hand total after card is no longer hidden
 
 "use strict";
 
