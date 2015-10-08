@@ -1,29 +1,26 @@
 // add split pair logic
 // bet persistence
 // show dealer hand total after card is no longer hidden
-// if you win on deal you shouldn't have control buttons still
-// make buttons very close together, big, and easy to use
 // what happens if player and dealer both get 21 on the draw??
 // plus sign animation on balance when you win, minus when u lose
-// acount for when the deck gets empty!!!!!
 // figure out the 'cannot read property amount of undefined error'
   // possibly redesign hit so that when cards are dealt dealer
   // won't run automatic hit method
   // inherit hit from cardUser and make dealer have own special hit?
   // it may have something to do with the flip card method
 // will three aces mess up handTotal()???
+// make buttons very close together, big, and easy to use
 
 "use strict";
 
-var player      = new User('Yag');
-var dealer      = new Dealer();
-var allPlayers  = [player, dealer];
-
+var player = new User('Yag');
+var dealer;
+var allPlayers = [player];
 
 Dom.updateBalance(player);
 
-
 function newGame() {
+  initializeDealer();
   refreshHands();
   Dom.newGame(allPlayers);
   Dom.betControls(event.target);
@@ -115,6 +112,11 @@ function dealerTurn() {
 
 
 // Helpers
+function initializeDealer() {
+  dealer = new Dealer();
+  allPlayers.push(dealer);
+}
+
 function findWinner() {
   player.handTotal() > dealer.handTotal() ? playerWins() : playerLoses()
 }
