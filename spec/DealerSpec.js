@@ -54,4 +54,10 @@ describe("Dealer", function() {
     expect(dealer.showCard).toHaveBeenCalled();
   });
 
+  it("should respond to #doubleDown", function() {
+    spyOn(dealer, 'doubleDown');
+    dealer.doubleDown();
+    expect(dealer.doubleDown).toHaveBeenCalled();
+  });
+
 });

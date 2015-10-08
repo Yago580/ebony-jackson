@@ -77,6 +77,7 @@ User.prototype.postBet = function(amount) {
 }
 User.prototype.doubleDown = function() {
   this.bet = this.bet * 2;
+  this.balance -= this.bet;
 }
 User.prototype.winBet = function() {
   this.balance += this.bet * 2;

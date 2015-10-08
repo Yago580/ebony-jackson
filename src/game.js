@@ -5,6 +5,7 @@
 // bet persistence
 // show dealer hand total after card is no longer hidden
 // if you win on deal you shouldn't have control buttons still
+// make buttons very close together, big, and easy to use
 
 "use strict";
 
