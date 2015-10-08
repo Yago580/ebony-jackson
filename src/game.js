@@ -5,6 +5,13 @@
 // make buttons very close together, big, and easy to use
 // what happens if player and dealer both get 21 on the draw??
 // plus sign animation on balance when you win, minus when u lose
+// acount for when the deck gets empty!!!!!
+// figure out the 'cannot read property amount of undefined error'
+  // possibly redesign hit so that when cards are dealt dealer
+  // won't run automatic hit method
+  // inherit hit from cardUser and make dealer have own special hit?
+  // it may have something to do with the flip card method
+// will three aces mess up handTotal()???
 
 "use strict";
 
@@ -42,16 +49,17 @@ function dealHands() {
   Dom.dealHands(allPlayers);
 
   if (player.twentyOne()) {
-    playerWins();
     Dom.hideControls();
+    playerWins();
   } else if (dealer.twentyOne()) {
     dealer.showCard();
     Dom.updateHand(dealer);
     Dom.hideControls();
     playerLoses();
+  } else {
+    Dom.hitStandButtons(event.target); 
   }
 
-  Dom.hitStandButtons(event.target);
 }
 
 

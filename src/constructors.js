@@ -160,10 +160,17 @@ CardPlayer.prototype.handTotal = function() {
     return 0;
 
   var aces = getAces(this.hand);
-  var regValues = getValues(getRegs(this.hand));
-  var handTotal = regValues.reduce(function (a, b) {
-    return a + b;
-  });
+  var regs = getRegs(this.hand);
+  var handTotal;
+
+  if (regs.length > 0) {
+    var regValues = getValues(getRegs(this.hand));
+    handTotal = regValues.reduce(function (a, b) {
+      return a + b;
+    });
+  } else {
+    handTotal = 0;
+  }
 
   if (aces.length > 1 && handTotal > 9) {
     aces.forEach(function (value) {
