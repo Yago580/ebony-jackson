@@ -1,5 +1,3 @@
-// validate bets
-// add more money
 // display hand total to user
 // display hand comparison
 // possibly double down logic
