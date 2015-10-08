@@ -4,12 +4,19 @@
 var Dom = (function() {
   var exports = {};
 
-  exports.newGame = function() {
+  exports.newGame = function(players) {
     $('.card-slot').remove();
     $('.control').hide();
     $('#beginGame').show();
     $('#playAgainPrompt').text('');
     $('#gameMessage').text('');
+    players.forEach(function (player) {
+      updateHandTotal(player);
+    });
+  }
+
+  exports.hideControls = function() {
+    $('.control').hide();
   }
 
   exports.getBet = function(target) {
@@ -68,21 +75,29 @@ var Dom = (function() {
   // private
   function imageFrom(card) {
     var src = card.hidden ? card.imageBack : card.image
-    return $('<img>').attr('class', 'card').attr('src', src);
+    var $image = $('<img>').addClass('card').attr('src', src);
+    if (card.doubleDown)
+      $image.addClass('double-down');
+    return $image
   }
 
   function appendCard(player, card, index) {
-    var cardSlot = cardSlotFrom(player, index);
+    var cardSlot = cardSlotFrom(player, card, index);
     
     cardSlot.append(imageFrom(card));
     $('.tableContainer').append(cardSlot);
   }
 
-  function cardSlotFrom(player, index) {
+  function cardSlotFrom(player, card, index) {
+    var topPos;
+    if (card.doubleDown)
+      topPos = player.topPos - 40;
+    else
+      topPos = player.topPos
     return $('<div>')
               .addClass('card-slot')
               .attr('id', player.domClass+'-card-slot'+index)
-              .css({top: player.topPos + (index * player.direction), left: 325 + (index * 35), position: 'fixed'});
+              .css({top: topPos + (index * player.direction), left: 325 + (index * 35), position: 'fixed'});
   }
 
   function updateHandTotal(player) {

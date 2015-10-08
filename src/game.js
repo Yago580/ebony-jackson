@@ -1,10 +1,10 @@
-// add double down logic
 // add split pair logic
 // dealer stops hitting at 17 hard
 // tie should 'push'
 // blackjack should play 3 to 2
 // bet persistence
 // show dealer hand total after card is no longer hidden
+// if you win on deal you shouldn't have control buttons still
 
 "use strict";
 
@@ -18,7 +18,7 @@ Dom.updateBalance(player);
 
 function newGame() {
   refreshHands();
-  Dom.newGame();
+  Dom.newGame(allPlayers);
   Dom.betControls(event.target);
 }
 
@@ -58,6 +58,20 @@ function hitPlayer() {
     playerWins();
   else if (player.bust())
     playerLoses();
+}
+
+function doubleDown() {
+  player.doubleDown();
+  dealer.doubleDown(player);
+  Dom.updateHand(player);
+  Dom.updateBalance(player);
+
+  if(player.twentyOne())
+    playerWins();
+  else if (player.bust())
+    playerLoses();
+  else
+    setTimeout(dealerTurn, 1500);
 }
 
 function dealerTurn() {

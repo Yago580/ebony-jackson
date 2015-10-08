@@ -75,6 +75,9 @@ User.prototype.postBet = function(amount) {
   this.balance -= amount;
   this.bet = amount;
 }
+User.prototype.doubleDown = function() {
+  this.bet = this.bet * 2;
+}
 User.prototype.winBet = function() {
   this.balance += this.bet * 2;
   this.bet = 0;
@@ -115,6 +118,11 @@ Dealer.prototype.hideCard = function() {
 }
 Dealer.prototype.showCard = function() {
   this.hand[1].show();
+}
+Dealer.prototype.doubleDown = function(player) {
+  var card = this.deck.getCard();
+  card.doubleDown = true;
+  player.hit(card);
 }
 
 
