@@ -27,29 +27,18 @@
         <div class="controls">
             <input type="image" src="images/buttons/bet.png" id="beginGame" class="control btn" onclick="newGame()"></input>
 
-  <!--           <form action="" id="betControls" class="control" onsubmit="postBet()" hidden>
-                <input type="radio" name="amount" value="5">$5
-                <input type="radio" name="amount" value="10">$10
-                <input type="radio" name="amount" value="15">$15
-                <input type="radio" name="amount" value="20">$20
-                <input type="radio" name="amount" value="50">$50
-                <input type="radio" name="amount" value="100">$100
-                <button type="submit">Place Bet</button>
-            </form> -->
-
             <form action="" id="betControls" class="control" onsubmit="postBet()" hidden>
                 <input type="radio" name="amount" id="25" class="input-hidden">
-                    <label for="25"><img src="images/chips/25.png" class="chip"></label>
+                    <label for="25" onclick="Dom.selectChip()"><img src="images/chips/25.png" class="chip"></label>
                 <input type="radio" name="amount" id="50" class="input-hidden">
-                    <label for="50"><img src="images/chips/50.png" class="chip"></label>
+                    <label for="50" onclick="Dom.selectChip()"><img src="images/chips/50.png" class="chip"></label>
                 <input type="radio" name="amount" id="75" class="input-hidden">
-                    <label for="75"><img src="images/chips/75.png" class="chip"></label>
+                    <label for="75" onclick="Dom.selectChip()"><img src="images/chips/75.png" class="chip"></label>
                 <input type="radio" name="amount" id="100" class="input-hidden">
-                    <label for="100"><img src="images/chips/100.png" class="chip"></label>
-                <button type="submit">Bet</button>
+                    <label for="100" onclick="Dom.selectChip()"><img src="images/chips/100.png" class="chip"></label>
+                <input type="submit" id="bet-btn" class="input-hidden"></input>
+                    <label for="bet-btn"><img src="images/buttons/bet.png" class="btn"></label>
             </form>
-
-
 
             <button id="deal" onclick="dealHands()" class="control" hidden>Deal</button>
             <div class="hitStand control" hidden>

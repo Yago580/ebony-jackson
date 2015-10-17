@@ -27,8 +27,6 @@ function newGame() {
 }
 
 
-
-
 function postBet() {
   event.preventDefault();
   var bet = Dom.getBet(event.target);
@@ -118,10 +116,6 @@ function initializeDealer() {
   dealer = new Dealer();
   allPlayers.push(dealer);
 }
-
-$('#betControls label').on('click', function() {
-  $(event.target).addClass('selected').siblings().removeClass('selected');
-});
 
 function findWinner() {
   player.handTotal() > dealer.handTotal() ? playerWins() : playerLoses()
