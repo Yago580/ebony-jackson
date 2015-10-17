@@ -24,7 +24,7 @@ var Dom = (function() {
     if ($button.length === 0)
       return null;
     $button.prop('checked', false);
-    return parseInt($button.val());
+    return parseInt($button.attr('id'));
   }
 
   exports.updateBalance = function(player) {
