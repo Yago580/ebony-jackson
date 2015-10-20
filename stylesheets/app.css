@@ -5,6 +5,16 @@ body{
   position:fixed;
 }
 
+.btn{
+  width:100px;
+  height:50px;
+}
+.chip{
+  width:50px;
+  height:50px;
+  margin:10px;
+}
+
 img.table{
   /*position:fixed;*/
   z-index:-1;
@@ -25,4 +35,15 @@ div.card-slot{
 
 div.messages{
   text-align:center;
+}
+
+.input-hidden{
+  position: absolute;
+  left: -9999px;
+}
+
+.selected{
+  /*background-color:#ccc;*/
+  border: 2px solid #ccc;
+  border-radius:10px;
 }

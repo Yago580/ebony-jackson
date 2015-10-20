@@ -5,11 +5,7 @@ var Dom = (function() {
   var exports = {};
 
   exports.newGame = function(players) {
-    $('.card-slot').remove();
-    $('.control').hide();
-    $('#beginGame').show();
-    $('#playAgainPrompt').text('');
-    $('#gameMessage').text('');
+    refreshDisplay();
     players.forEach(function (player) {
       updateHandTotal(player);
     });
@@ -24,7 +20,7 @@ var Dom = (function() {
     if ($button.length === 0)
       return null;
     $button.prop('checked', false);
-    return parseInt($button.val());
+    return parseInt($button.attr('id'));
   }
 
   exports.updateBalance = function(player) {
@@ -43,7 +39,7 @@ var Dom = (function() {
     player.hand.forEach(function (card, index) {
       if (!card.dealt)
         appendCard(player, card, index);
-    })
+    });
     updateHandTotal(player);
   }
 
@@ -71,6 +67,12 @@ var Dom = (function() {
     $(target).hide();
     $('.hitStand').show();
   }
+
+  exports.selectChip = function() {
+    $(event.target).addClass('selected').siblings().removeClass('selected');
+  }
+
+
 
   // private
   function imageFrom(card) {
@@ -102,6 +104,15 @@ var Dom = (function() {
 
   function updateHandTotal(player) {
     $('#'+player.domClass+'-handTotal').text(player.handTotal());
+  }
+
+  function refreshDisplay() {
+    $('.card-slot').remove();
+    $('.control').hide();
+    $('#beginGame').show();
+    $('#playAgainPrompt').text('');
+    $('#gameMessage').text('');
+    $('.selected').removeClass('selected');
   }
 
   return exports;
