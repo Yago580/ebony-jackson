@@ -39,7 +39,7 @@ var Dom = (function() {
     player.hand.forEach(function (card, index) {
       if (!card.dealt)
         appendCard(player, card, index);
-    })
+    });
     updateHandTotal(player);
   }
 
@@ -71,6 +71,8 @@ var Dom = (function() {
   exports.selectChip = function() {
     $(event.target).addClass('selected').siblings().removeClass('selected');
   }
+
+
 
   // private
   function imageFrom(card) {
