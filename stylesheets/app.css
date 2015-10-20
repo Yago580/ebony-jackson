@@ -6,8 +6,8 @@ body{
 }
 
 .btn{
-  width:100px;
-  height:50px;
+  width:75px;
+  height:40px;
 }
 .chip{
   width:50px;
@@ -16,7 +16,6 @@ body{
 }
 
 img.table{
-  /*position:fixed;*/
   z-index:-1;
 }
 
@@ -25,8 +24,13 @@ img.card{
   height:150px;
 }
 
-div.card-slot{
-  /*position:fixed;*/
+div.playerInfo{
+  position: fixed;
+  left:50px;
+  top:50px;
+  color:#FFCC00;
+  font-family:Arial;
+  font-weight:bold;
 }
 
 .double-down{
@@ -35,6 +39,12 @@ div.card-slot{
 
 div.messages{
   text-align:center;
+}
+
+div.controls{
+  position:fixed;
+  top:500px;
+  left:50px;
 }
 
 .input-hidden{
