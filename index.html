@@ -18,23 +18,25 @@
             </table>
         </div>
 
-        <div class="controls">
+        <div class="messages">
+            <h3 id="gameMessage"></h3>
+            <h3 id="playAgainPrompt"></h3>
+        </div>
+
+        <div class="prompts">
             <input type="image" src="images/buttons/newgame.png" id="beginGame" class="control btn" onclick="newGame()">
 
-            <form action="" id="betControls" class="control" onsubmit="postBet()" hidden>
-                <input type="radio" name="amount" id="25" class="input-hidden">
-                    <label for="25" onclick="Dom.selectChip()"><img src="images/chips/25.png" class="chip"></label>
-                <input type="radio" name="amount" id="50" class="input-hidden">
-                    <label for="50" onclick="Dom.selectChip()"><img src="images/chips/50.png" class="chip"></label>
-                <input type="radio" name="amount" id="75" class="input-hidden">
-                    <label for="75" onclick="Dom.selectChip()"><img src="images/chips/75.png" class="chip"></label>
-                <input type="radio" name="amount" id="100" class="input-hidden">
-                    <label for="100" onclick="Dom.selectChip()"><img src="images/chips/100.png" class="chip"></label>
-                <input type="submit" id="bet-btn" class="input-hidden"></input>
-                    <label for="bet-btn"><img src="images/buttons/bet.png" class="btn"></label>
-            </form>
+            <div class="chips control" id="betControls" hidden>
+                <input type="image" src="images/chips/25.png" id="25" class="chip" onclick="postBet(25)">
+                <input type="image" src="images/chips/50.png" id="50" class="chip" onclick="postBet(50)">
+                <input type="image" src="images/chips/75.png" id="75" class="chip" onclick="postBet(75)">
+                <input type="image" src="images/chips/100.png" id="100" class="chip" onclick="postBet(100)">
+            </div>
 
             <input type="image" src="images/buttons/deal.png" id="deal" class="control btn" onclick="dealHands()" hidden>
+        </div>
+
+        <div class="controls">
             <div class="hitStand control" hidden>
                 <input type="image" src="images/buttons/hit.png" class="btn" onclick="hitPlayer()">
                 <input type="image" src="images/buttons/stand.png" class="btn" onclick="dealerTurn()">
@@ -42,10 +44,6 @@
             </div>
         </div>
 
-        <div class="messages">
-            <h3 id="gameMessage"></h3>
-            <h3 id="playAgainPrompt"></h3>
-        </div>
 
         <script src="src/jquery.min.js" type="text/javascript"></script>
         <script src="src/constructors.js" type="text/javascript"></script>

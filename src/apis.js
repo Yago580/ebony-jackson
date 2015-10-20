@@ -68,11 +68,6 @@ var Dom = (function() {
     $('.hitStand').show();
   }
 
-  exports.selectChip = function() {
-    $(event.target).addClass('selected').siblings().removeClass('selected');
-  }
-
-
 
   // private
   function imageFrom(card) {
