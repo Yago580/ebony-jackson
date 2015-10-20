@@ -25,7 +25,7 @@
         </div>
 
         <div class="controls">
-            <input type="image" src="images/buttons/bet.png" id="beginGame" class="control btn" onclick="newGame()"></input>
+            <input type="image" src="images/buttons/newgame.png" id="beginGame" class="control btn" onclick="newGame()">
 
             <form action="" id="betControls" class="control" onsubmit="postBet()" hidden>
                 <input type="radio" name="amount" id="25" class="input-hidden">
@@ -40,11 +40,11 @@
                     <label for="bet-btn"><img src="images/buttons/bet.png" class="btn"></label>
             </form>
 
-            <button id="deal" onclick="dealHands()" class="control" hidden>Deal</button>
+            <input type="image" src="images/buttons/deal.png" id="deal" class="control btn" onclick="dealHands()" hidden>
             <div class="hitStand control" hidden>
-                <input type="image" src="images/buttons/hit.png" class="btn" onclick="hitPlayer()"></input>
-                <input type="image" src="images/buttons/stay.png" class="btn" onclick="dealerTurn()"></input>
-                <input type="image" src="images/buttons/doubledown.png" class="btn" onclick="doubleDown()"></input>
+                <input type="image" src="images/buttons/hit.png" class="btn" onclick="hitPlayer()">
+                <input type="image" src="images/buttons/stand.png" class="btn" onclick="dealerTurn()">
+                <input type="image" src="images/buttons/doubledown.png" class="btn" onclick="doubleDown()">
             </div>
         </div>
 
