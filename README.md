@@ -1,10 +1,10 @@
-# ebony jackson
+# Ebony Jackson
 
 ![game screenshot](/images/screenshot.png)
 Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. play online [here!](https://ebony-jackson.herokuapp.com)
 
 
-### the dom
+### Dom
 I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. This gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation
 
 ```javascript
@@ -74,7 +74,7 @@ function postBet(amount) {
 }
 ```
 
-### contribute
+### Contribute
 
 If you would like to contribute there is a list at the top of `src/game.js` that details a bunch of features/minor bug fixes that I haven't been able to get around to yet. Feel free to take a crack at them!
 
