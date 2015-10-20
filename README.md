@@ -49,7 +49,7 @@ var Dom = (function() {
   return exports;
 })();
 ```
-Not sure if this is the best way to go about building a javascript app, but namespacing the Dom interactions definitely helped me organize my code and maximize readability.
+Not sure if this is the best way to go about building a javascript app, but namespacing the Dom interactions made it alot easier to do things like dynamically generating urls for card images.
 
 
 ### onclick / onsubmit
@@ -65,7 +65,7 @@ There is one pattern that I adopted while writing the code for this app that I r
     <input type="image" src="images/chips/100.png" class="chip" onclick="postBet(100)">
 </div>
 ```
-Writing the html like this allowed the `postBet()` function to be really simple and clean.
+Writing the html like this allowed the `postBet()` function in `src/game.js` to be really simple and clean.
 ```javascript
 function postBet(amount) {
   player.postBet(amount);
