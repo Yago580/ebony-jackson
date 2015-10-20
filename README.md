@@ -59,10 +59,10 @@ There is one pattern that I adopted while writing the code for this app that I r
 ```html
 <!-- onclick property -->
 <div class="chips control" id="betControls" hidden>
-    <input type="image" src="images/chips/25.png" id="25" class="chip" onclick="postBet(25)">
-    <input type="image" src="images/chips/50.png" id="50" class="chip" onclick="postBet(50)">
-    <input type="image" src="images/chips/75.png" id="75" class="chip" onclick="postBet(75)">
-    <input type="image" src="images/chips/100.png" id="100" class="chip" onclick="postBet(100)">
+    <input type="image" src="images/chips/25.png" class="chip" onclick="postBet(25)">
+    <input type="image" src="images/chips/50.png" class="chip" onclick="postBet(50)">
+    <input type="image" src="images/chips/75.png" class="chip" onclick="postBet(75)">
+    <input type="image" src="images/chips/100.png" class="chip" onclick="postBet(100)">
 </div>
 ```
 Writing the html like this allowed the `postBet()` function to be really simple and clean.
