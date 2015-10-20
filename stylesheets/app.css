@@ -33,18 +33,36 @@ div.playerInfo{
   font-weight:bold;
 }
 
+div.prompts{
+  position:fixed;
+  top:500px;
+  left:390px;
+}
+
 .double-down{
   transform: rotate(270deg);
 }
 
 div.messages{
   text-align:center;
+  position: fixed;
+  top: 250px;
+  left: 310px;
+  color:yellow;
+  font-family:Arial;
+  font-weight:bold;
 }
 
 div.controls{
   position:fixed;
   top:500px;
-  left:50px;
+  left:585px;
+}
+
+form#betControls{
+  top:480px;
+  left: 275px;
+  position: fixed;
 }
 
 .input-hidden{

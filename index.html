@@ -18,7 +18,12 @@
             </table>
         </div>
 
-        <div class="controls">
+        <div class="messages">
+            <h3 id="gameMessage"></h3>
+            <h3 id="playAgainPrompt"></h3>
+        </div>
+
+        <div class="prompts">
             <input type="image" src="images/buttons/newgame.png" id="beginGame" class="control btn" onclick="newGame()">
 
             <form action="" id="betControls" class="control" onsubmit="postBet()" hidden>
@@ -35,6 +40,9 @@
             </form>
 
             <input type="image" src="images/buttons/deal.png" id="deal" class="control btn" onclick="dealHands()" hidden>
+        </div>
+
+        <div class="controls">
             <div class="hitStand control" hidden>
                 <input type="image" src="images/buttons/hit.png" class="btn" onclick="hitPlayer()">
                 <input type="image" src="images/buttons/stand.png" class="btn" onclick="dealerTurn()">
@@ -42,10 +50,6 @@
             </div>
         </div>
 
-        <div class="messages">
-            <h3 id="gameMessage"></h3>
-            <h3 id="playAgainPrompt"></h3>
-        </div>
 
         <script src="src/jquery.min.js" type="text/javascript"></script>
         <script src="src/constructors.js" type="text/javascript"></script>
