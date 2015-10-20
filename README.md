@@ -7,6 +7,7 @@ play online [here!](https://ebony-jackson.herokuapp.com)
 
 ### Run Locally
 
++ fork and cd into repo
 + `node server.js`
 + open https://localhost:8080
 
