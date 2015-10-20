@@ -71,7 +71,6 @@ form#betControls{
 }
 
 .selected{
-  /*background-color:#ccc;*/
   border: 2px solid #ccc;
   border-radius:10px;
 }

@@ -27,6 +27,8 @@ Card.prototype.show = function() {
 
 
 
+
+
 function Deck() {
   var suits  = ['diamonds','clubs','hearts','spades'];
   var faces  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
@@ -57,6 +59,86 @@ function Deck() {
 Deck.prototype.getCard = function() {
   return this._cards.pop();
 }
+
+
+
+
+
+
+function CardPlayer() {
+  this.hand = [];
+}
+CardPlayer.prototype.hit = function(card) {
+  this.hand.push(card);
+}
+CardPlayer.prototype.unDealtCards = function() {
+  return this.hand.filter(function (card) {
+    return !card.dealt;
+  });
+}
+CardPlayer.prototype.discardHand = function() {
+  this.hand = [];
+  this.hitting = true;
+}
+CardPlayer.prototype.handTotal = function() {
+  if (this.hand.length === 1)
+    return this.hand[0].amount;
+  else if (this.hand.length === 0)
+    return 0;
+
+  var aces = getAces(this.hand);
+  var regs = getRegs(this.hand);
+  var handTotal;
+
+  if (regs.length > 0) {
+    var regValues = getValues(getRegs(this.hand));
+    handTotal = regValues.reduce(function (a, b) {
+      return a + b;
+    });
+  } else {
+    handTotal = 0;
+  }
+
+  if (aces.length > 1 && handTotal > 9) {
+    aces.forEach(function (value) {
+      handTotal += 1;
+    })
+  } else {
+    aces.forEach(function (value) {
+      handTotal += (handTotal < 11) ? 11 : 1;
+    });
+  }
+
+
+  return handTotal;
+
+  function getAces(hand) {
+    return hand.filter(function (card) {
+      return card.amount === 1;
+    })
+  }
+
+  function getRegs(hand) {
+    return hand.filter(function (card) {
+      return card.amount !== 1;
+    })
+  }
+
+  function getValues(hand) {
+    return hand.map(function (card) {
+      return card.amount;
+    });
+  }
+
+}
+CardPlayer.prototype.bust = function() {
+  return this.handTotal() > 21;
+}
+CardPlayer.prototype.twentyOne = function() {
+  return this.handTotal() === 21;
+}
+
+
 
 
 
@@ -138,75 +220,3 @@ Dealer.prototype.doubleDown = function(player) {
 
 
 
-function CardPlayer() {
-  this.hand = [];
-}
-CardPlayer.prototype.hit = function(card) {
-  this.hand.push(card);
-}
-CardPlayer.prototype.unDealtCards = function() {
-  return this.hand.filter(function (card) {
-    return !card.dealt;
-  });
-}
-CardPlayer.prototype.discardHand = function() {
-  this.hand = [];
-  this.hitting = true;
-}
-CardPlayer.prototype.handTotal = function() {
-  if (this.hand.length === 1)
-    return this.hand[0].amount;
-  else if (this.hand.length === 0)
-    return 0;
-
-  var aces = getAces(this.hand);
-  var regs = getRegs(this.hand);
-  var handTotal;
-
-  if (regs.length > 0) {
-    var regValues = getValues(getRegs(this.hand));
-    handTotal = regValues.reduce(function (a, b) {
-      return a + b;
-    });
-  } else {
-    handTotal = 0;
-  }
-
-  if (aces.length > 1 && handTotal > 9) {
-    aces.forEach(function (value) {
-      handTotal += 1;
-    })
-  } else {
-    aces.forEach(function (value) {
-      handTotal += (handTotal < 11) ? 11 : 1;
-    });
-  }
-
-
-  return handTotal;
-
-  function getAces(hand) {
-    return hand.filter(function (card) {
-      return card.amount === 1;
-    })
-  }
-
-  function getRegs(hand) {
-    return hand.filter(function (card) {
-      return card.amount !== 1;
-    })
-  }
-
-  function getValues(hand) {
-    return hand.map(function (card) {
-      return card.amount;
-    });
-  }
-
-}
-CardPlayer.prototype.bust = function() {
-  return this.handTotal() > 21;
-}
-CardPlayer.prototype.twentyOne = function() {
-  return this.handTotal() === 21;
-}
