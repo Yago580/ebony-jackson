@@ -5,7 +5,7 @@ Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. pl
 
 
 ### the code
-I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api.
+I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. This gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation
 
 ```javascript
 
@@ -19,14 +19,24 @@ var Dom = (function() {
       updateHandTotal(player);
     });
   }
-
-  exports.hideControls = function() {
-    $('.control').hide();
+  
+  exports.updateHand = function(player) {
+    player.hand.forEach(function (card, index) {
+      if (!card.dealt)
+        appendCard(player, card, index);
+    });
+    updateHandTotal(player);
   }
   
   //etc ...
   
-    // private
+  // private
+  function appendCard(player, card, index) {
+    var cardSlot = cardSlotFrom(player, card, index);
+    cardSlot.append(imageFrom(card));
+    $('.tableContainer').append(cardSlot);
+  }
+  
   function imageFrom(card) {
     var src = card.hidden ? card.imageBack : card.image
     var $image = $('<img>').addClass('card').attr('src', src);
@@ -36,11 +46,8 @@ var Dom = (function() {
   }
   
   // etc....
-
-}
-
-// src/game.js
-Dom.newGame(allPlayers);
+  return exports;
+})();
 ```
 Not sure if this is the best way to go about building a javascript app, but namespacing the Dom interactions definitely helped me organize my code and maximize readability.
 
@@ -48,7 +55,23 @@ If you would like to contribute there is a list at the top of `src/game.js` that
 
 There is one pattern that I adopted while writing the code for this app that I really like and intend to continue using: setting `onclick` and `onsubmit` attributes inline in html. I found this to be a lot cleaner than adding a bunch of event listeners with jQuery like I normally do.
 
-All of the game logic is in `src/game.js`
+```html
+<!-- onclick property -->
+<div class="chips control" id="betControls" hidden>
+    <input type="image" src="images/chips/25.png" id="25" class="chip" onclick="postBet(25)">
+    <input type="image" src="images/chips/50.png" id="50" class="chip" onclick="postBet(50)">
+    <input type="image" src="images/chips/75.png" id="75" class="chip" onclick="postBet(75)">
+    <input type="image" src="images/chips/100.png" id="100" class="chip" onclick="postBet(100)">
+</div>
+```
+Writing the html like this allowed the `postBet()` function to be really simple and clean.
+```javascript
+function postBet(amount) {
+  player.postBet(amount);
+  Dom.updateBalance(player);
+  Dom.dealButton($(event.target).parent());
+}
+```
 
 
 ### Run Locally
