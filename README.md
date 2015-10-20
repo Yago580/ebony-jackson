@@ -4,7 +4,7 @@ Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. pl
 ![game screenshot](/images/screenshot.png)
 
 
-### the code
+### the dom
 I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. This gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation
 
 ```javascript
@@ -51,7 +51,8 @@ var Dom = (function() {
 ```
 Not sure if this is the best way to go about building a javascript app, but namespacing the Dom interactions definitely helped me organize my code and maximize readability.
 
-If you would like to contribute there is a list at the top of `src/game.js` that details a bunch of features/minor bug fixes that I haven't been able to get around to yet. Feel free to take a crack at them!
+
+### onclick / onsubmit
 
 There is one pattern that I adopted while writing the code for this app that I really like and intend to continue using: setting `onclick` and `onsubmit` attributes inline in html. I found this to be a lot cleaner than adding a bunch of event listeners with jQuery like I normally do.
 
@@ -73,13 +74,16 @@ function postBet(amount) {
 }
 ```
 
+### contribute
 
-### Run Locally
+If you would like to contribute there is a list at the top of `src/game.js` that details a bunch of features/minor bug fixes that I haven't been able to get around to yet. Feel free to take a crack at them!
+
+#### Run Locally
 
 + fork and cd into repo
 + `node server.js`
 + open https://localhost:8080
 
-### Run Specs
+#### Run Specs
 
 + https://localhost:8080/Specrunner.html
