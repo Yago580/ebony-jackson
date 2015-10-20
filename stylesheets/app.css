@@ -1,6 +1,7 @@
 /** {
   border: 1px solid red;
 }*/
+
 body{
   position:fixed;
 }
@@ -8,11 +9,6 @@ body{
 .btn{
   width:75px;
   height:40px;
-}
-.chip{
-  width:50px;
-  height:50px;
-  margin:10px;
 }
 
 img.table{
@@ -70,7 +66,24 @@ form#betControls{
   left: -9999px;
 }
 
-.selected{
-  border: 2px solid #ccc;
-  border-radius:10px;
+
+.chips{
+  position:fixed;
+  text-align:center;
+  top:475px;
+  left:180px;
+  width:500px;
+}
+
+.chip{
+  border: none;
+  outline:none;
+  margin:10px;
+  width:50px;
+  height:50px;
+}
+
+
+.chip:hover{
+  -webkit-filter: grayscale(0.5) hue-rotate(90deg);
 }
