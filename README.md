@@ -5,7 +5,7 @@
 
 ### Contribute
 
-If you would like to contribute there is a list at the top of `src/game.js` that details a bunch of features/minor bug fixes that I haven't been able to get around to yet. Feel free to take a crack at them! And please write specs for any code that's added!
+If you would like to contribute there is a list at the top of `src/game.js` that details a bunch of features/minor bug fixes that I haven't been able to get around to yet. Feel free to take a crack at them, and please write specs for any code that's added!
 
 ##### Run Locally
 
