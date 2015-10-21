@@ -15,13 +15,13 @@ var Dom = (function() {
     $('.control').hide();
   }
 
-  exports.getBet = function(target) {
-    var $button = $(target).children('input[type="radio"]:checked');
-    if ($button.length === 0)
-      return null;
-    $button.prop('checked', false);
-    return parseInt($button.attr('id'));
-  }
+  // exports.getBet = function(target) {
+  //   var $button = $(target).children('input[type="radio"]:checked');
+  //   if ($button.length === 0)
+  //     return null;
+  //   $button.prop('checked', false);
+  //   return parseInt($button.attr('id'));
+  // }
 
   exports.updateBalance = function(player) {
     $('#balance').text(player.balance);
@@ -80,7 +80,6 @@ var Dom = (function() {
 
   function appendCard(player, card, index) {
     var cardSlot = cardSlotFrom(player, card, index);
-    
     cardSlot.append(imageFrom(card));
     $('.tableContainer').append(cardSlot);
   }
