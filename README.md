@@ -5,52 +5,7 @@ Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. pl
 
 
 ### Dom
-I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. This gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation
-
-```javascript
-
-// src/apis.js
-var Dom = (function() {
-  var exports = {};
-
-  exports.newGame = function(players) {
-    refreshDisplay();
-    players.forEach(function (player) {
-      updateHandTotal(player);
-    });
-  }
-  
-  exports.updateHand = function(player) {
-    player.hand.forEach(function (card, index) {
-      if (!card.dealt)
-        appendCard(player, card, index);
-    });
-    updateHandTotal(player);
-  }
-  
-  //etc ...
-  
-  // private
-  function appendCard(player, card, index) {
-    var cardSlot = cardSlotFrom(player, card, index);
-    cardSlot.append(imageFrom(card));
-    $('.tableContainer').append(cardSlot);
-  }
-  
-  function imageFrom(card) {
-    var src = card.hidden ? card.imageBack : card.image
-    var $image = $('<img>').addClass('card').attr('src', src);
-    if (card.doubleDown)
-      $image.addClass('double-down');
-    return $image
-  }
-  
-  // etc....
-  return exports;
-})();
-```
-Not sure if this is the best way to go about building a javascript app, but namespacing the Dom interactions made it alot easier to do things like dynamically generating urls for card images.
-
+I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. In the past when trying to create an interactive app I wouldn't organize and decouple my code like this, and it caused me a lot of headaches when trying to change code deeply nested in a non descriptive callback. The Dom api gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation.
 
 ### onclick / onsubmit
 
