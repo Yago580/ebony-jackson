@@ -1,7 +1,7 @@
 # Ebony Jackson
 
 ![game screenshot](/images/screenshot.png)
-Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. play online [here!](https://ebony-jackson.herokuapp.com)
+[Play Here!](https://ebony-jackson.herokuapp.com)
 
 ### Contribute
 
