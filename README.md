@@ -5,7 +5,7 @@ Ebony Jackson is a blackjack game that I designed with JavaScript and jQuery. pl
 
 
 ### Dom
-I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. In the past when trying to create an interactive app I wouldn't organize and decouple my code like this, and it caused me a lot of headaches when trying to change code deeply nested in a non descriptive callback. The Dom api gave me a clean interface I could use rather than littering all the game logic with jQuery Dom manipulation.
+I tried an interesting design pattern on this app by extracting all of the Dom interactions into a seperate api. In the past when trying to create an interactive app I wouldn't organize and decouple my code. This caused me a lot of headaches when trying to change code deeply nested in non descriptive callbacks. The Dom api gave me a clean interface I could use rather than littering jQuery Dom manipulation all over the game logic.
 
 ### onclick / onsubmit
 
