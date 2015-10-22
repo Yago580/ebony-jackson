@@ -15,4 +15,4 @@ If you would like to contribute there is a list at the top of `src/game.js` that
 + spec https://localhost:8080/SpecRunner.html
 
 ### Thoughts
-I'd love to discuss some of the patterns that I used when writing this code. I tried to really plan out the design of this game in advance in order to better organize the JavaScript functionality.
+I'd love to discuss some of the patterns that I used when writing this code. I tried to really plan out the design of this game in advance in order to better organize the JavaScript functionality. I wanted to try namespacing all interaction with the Dom in order to make the code easier to work with. It helped at times to have a Dom api, others it was a little cumbersome. I would love any suggestions that could help me refactor further.
